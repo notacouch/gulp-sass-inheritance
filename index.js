@@ -44,7 +44,11 @@ function gulpSassInheritance(options) {
     function endStream() {
         if (files.length) {
 
-            graph = sassGraph.parseDir(options.dir, options);
+            if (typeof options.graph !== 'undefined') {
+                graph = options.graph;
+            } else {
+                graph = sassGraph.parseDir(options.dir, options);
+            }
 
             check(_.pluck(files, 'path'));
 
